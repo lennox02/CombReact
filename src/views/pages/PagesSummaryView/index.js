@@ -5,10 +5,10 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Sales from './Sales';
+import Sales from 'src/views/posts/PostsSummaryView/Sales';
 import Pages from './Pages';
-import Post from './Post';
-import Filters from './Filters';
+import PageCard from './Page';
+import Filters from 'src/views/posts/PostsSummaryView/Filters';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,7 +88,7 @@ const PagesSummary = () => {
                   xl={6}
                   xs={6}
                 >
-                  <Post icon={"Facebook"} image={"/static/images/facebook/post/post_1.jpg"} date={"12/14/20"}/>
+                  <PageCard icon={"Facebook"} image={"/static/images/facebook/page/dyson_banner.png"} />
                 </Grid>
                 : null
             }
@@ -99,61 +99,7 @@ const PagesSummary = () => {
               xl={6}
               xs={6}
             >
-              <Post icon={"Instagram"} image={"/static/images/facebook/post/post_2.jpg"} date={"12/10/20"} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <Post icon={"Facebook"} image={"/static/images/facebook/post/post_3.jpg"} date={"12/07/20"} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <Post icon={"Instagram"} image={"/static/images/facebook/post/post_4.jpg"} date={"12/03/20"} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <Post icon={"Facebook"} image={"/static/images/facebook/post/post_5.jpg"} date={"11/30/20"} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <Post icon={"Instagram"} image={"/static/images/facebook/post/post_6.png"} date={"11/26/20"} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <Post icon={"Facebook"} image={"/static/images/facebook/post/post_7.jpg"} date={"11/23/20"} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <Post icon={"Instagram"} image={"/static/images/facebook/post/post_8.jpg"} date={"11/19/20"} />
+              <PageCard icon={"Instagram"} image={"/static/images/facebook/page/dyson_instagram_banner.png"} />
             </Grid>
           </Grid>
           <Grid

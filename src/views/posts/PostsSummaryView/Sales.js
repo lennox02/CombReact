@@ -24,16 +24,20 @@ const Sales = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const views = [1081, 1099, 14833, 3208, 1978, 1264, 22014];
+  const comments = [64, 89, 2123, 408, 190, 101, 3134];
+  const dates = ['8 Dec', '9 Dec', '10 Dec', '11 Dec', '12 Dec', '13 Dec', '14 Dec'];
+
   const data = {
     datasets: [
       {
         backgroundColor: colors.blue[500],
-        data: [1081, 1099, 14833, 3208, 1978, 1264, 22014],
+        data: views,
         label: 'Views'
       },
       {
         backgroundColor: colors.indigo[400],
-        data: [64, 89, 2123, 408, 190, 101, 3134],
+        data: comments,
         label: 'Comments'
       }
     ],
@@ -54,7 +58,7 @@ const Sales = ({ className, ...rest }) => {
         }]
       }
     },
-    labels: ['8 Dec', '9 Dec', '10 Dec', '11 Dec', '12 Dec', '13 Dec', '14 Dec']
+    labels: dates
   };
 
   const options = {
