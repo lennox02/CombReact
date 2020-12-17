@@ -56,6 +56,7 @@ const NavItem = ({
       {...rest}
     >
       <Button
+        style={{color: "white"}}
         activeClassName={classes.active}
         className={classes.button}
         component={RouterLink}

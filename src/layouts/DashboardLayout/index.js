@@ -44,7 +44,7 @@ const DashboardLayout = () => {
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
       />
-      <div className={classes.wrapper}>
+      <div className={classes.wrapper} style={{paddingLeft: "128px"}}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Outlet />

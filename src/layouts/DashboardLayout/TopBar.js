@@ -34,12 +34,13 @@ const TopBar = ({
 
   return (
     <AppBar
+      style={{backgroundColor: "white", color: "#0096dc"}}
       className={clsx(classes.root, className)}
       elevation={0}
       {...rest}
     >
       <Toolbar>
-        <RouterLink to="/">
+        <RouterLink to="/app/posts">
           <Logo />
         </RouterLink>
         <Box flexGrow={1} />
@@ -58,12 +59,13 @@ const TopBar = ({
           </IconButton>
         </Hidden>
         <Hidden lgUp>
+          <RouterLink to="/app/posts">
           <IconButton
             color="inherit"
-            onClick={onMobileNavOpen}
           >
             <MenuIcon />
           </IconButton>
+          </RouterLink>
         </Hidden>
       </Toolbar>
     </AppBar>

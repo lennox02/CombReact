@@ -35,7 +35,7 @@ const MainLayout = () => {
   return (
     <div className={classes.root}>
       <TopBar />
-      <div className={classes.wrapper}>
+      <div className={classes.wrapper} style={{paddingLeft: "128px"}}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Outlet />
