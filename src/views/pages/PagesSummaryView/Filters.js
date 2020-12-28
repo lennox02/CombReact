@@ -132,7 +132,7 @@ const time = [
 
 
 
-const Filters = ({ className, stateFilter, ...rest }) => {
+const PageFilters = ({ className, pageStateFilter, ...rest }) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -146,7 +146,7 @@ const Filters = ({ className, stateFilter, ...rest }) => {
       [event.target.name]: event.target.value
     });
     console.log(event.target.value);
-    stateFilter(event.target.name, event.target.value);
+    pageStateFilter(event.target.name, event.target.value);
   };
 
   return (
@@ -279,8 +279,8 @@ const Filters = ({ className, stateFilter, ...rest }) => {
   );
 };
 
-Filters.propTypes = {
+PageFilters.propTypes = {
   className: PropTypes.string
 };
 
-export default Filters;
+export default PageFilters;

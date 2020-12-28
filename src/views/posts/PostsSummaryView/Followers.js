@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Sales = ({ className, state, ...rest }) => {
+const Followers = ({ className, state, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -31,133 +31,89 @@ const Sales = ({ className, state, ...rest }) => {
     return d.getDate() + " " + monthNames[d.getMonth()];
   }
 
-  let views = [];
-  let comments = [];
+  let fbFollowers = [];
+  let igFollowers = [];
   let dates = [];
 
-  const modNum = () => {
-    let mod = 1;
-    if(state.gender !== "all"){
-      mod = mod * 0.5;
-    }
-
-    if(state.age === "18"){
-      mod = mod * 0.20;
-    } else if(state.age === "30"){
-      mod = mod * 0.35;
-    } else if(state.age === "40"){
-      mod = mod * 0.40;
-    } else if(state.age === "60"){
-      mod = mod * 0.05;
-    }
-
-    if(state.reaction === "like"){
-      mod = mod * 0.2;
-    } else if(state.reaction === "love"){
-      mod = mod * 0.05;
-    } else if(state.reaction === "care"){
-      mod = mod * 0.01;
-    } else if(state.reaction === "laugh"){
-      mod = mod * 0.02;
-    } else if(state.reaction === "wow"){
-      mod = mod * 0.005;
-    } else if(state.reaction === "sad"){
-      mod = mod * 0.03;
-    } else if(state.reaction === "angry"){
-      mod = mod * 0.15;
-    }
-
-    return mod;
-  }
-
-  let mod = modNum();
-  let ig = 1;
-  let fb = 1;
-  if(state.platform === 'facebook'){
-    ig = 0.1;
-  } else if(state.platform === 'instagram'){
-    fb = 0.1;
-  }
-
-  views = [
-    1264 * mod,
-    22014 * mod * fb,
-    1081 * mod,
-    1099 * mod,
-    14833 * mod * ig,
-    3208 * mod,
-    1978 * mod,
-    1264 * mod,
-    22014 * mod * fb,
-    1081 * mod,
-    1099 * mod,
-    14833 * mod * ig,
-    3208 * mod,
-    1978 * mod,
-    1264 * mod,
-    22014 * mod * fb,
-    1081 * mod,
-    1099 * mod,
-    14833 * mod * ig,
-    3208 * mod,
-    1978 * mod,
-    1264 * mod,
-    22014 * mod * fb,
-    1081 * mod,
-    1099 * mod,
-    14833 * mod * ig,
-    3208 * mod,
-    1978 * mod,
-    1264 * mod,
-    22014 * mod * fb
+  fbFollowers = [
+    25023,
+    25225,
+    25248,
+    25270,
+    25300,
+    25311,
+    25324,
+    25320,
+    25601,
+    25680,
+    25720,
+    25752,
+    25768,
+    25775,
+    25776,
+    26021,
+    26150,
+    26248,
+    26299,
+    26323,
+    26328,
+    26320,
+    26718,
+    26838,
+    26912,
+    26945,
+    26956,
+    26931,
+    26943,
+    27405
   ];
-  comments = [
-    101 * mod,
-    3134 * mod * fb,
-    64 * mod,
-    89 * mod,
-    2123 * mod * ig,
-    408 * mod,
-    190 * mod,
-    101 * mod,
-    3134 * mod * fb,
-    64 * mod,
-    89 * mod,
-    2123 * mod * ig,
-    408 * mod,
-    190 * mod,
-    101 * mod,
-    3134 * mod * fb,
-    64 * mod,
-    89 * mod,
-    2123 * mod * ig,
-    408 * mod,
-    190 * mod,
-    101 * mod,
-    3134 * mod * fb,
-    64 * mod,
-    89 * mod,
-    2123 * mod * ig,
-    408 * mod,
-    190 * mod,
-    101 * mod,
-    3134 * mod * fb
+  igFollowers = [
+    22048,
+    22080,
+    22115,
+    22137,
+    22503,
+    22584,
+    22632,
+    22661,
+    22682,
+    22699,
+    22712,
+    23055,
+    23209,
+    23273,
+    23312,
+    23450,
+    23520,
+    23561,
+    24092,
+    24247,
+    24321,
+    24355,
+    24388,
+    24395,
+    24401,
+    24721,
+    24803,
+    24909,
+    24968,
+    25070
   ];
-  dates = [];
+
   for (let i = 30; i >= 1; i--) {
     dates.push(getCalcDate(i))
   }
 
   if(state.time === "week"){
-    views.splice(0, 23);
-    comments.splice(0, 23);
+    fbFollowers.splice(0, 23);
+    igFollowers.splice(0, 23);
     dates.splice(0, 23);
   }
 
-  // round graph values
-  for(let i=0;i<views.length;i++){
-    views[i] = Math.round(views[i]);
-    comments[i] = Math.round(comments[i]);
+  let followers = fbFollowers;
+
+  if(state.platform === "instagram"){
+    followers = igFollowers;
   }
 
 
@@ -165,13 +121,8 @@ const Sales = ({ className, state, ...rest }) => {
     datasets: [
       {
         backgroundColor: colors.blue[500],
-        data: views,
-        label: 'Views'
-      },
-      {
-        backgroundColor: colors.indigo[400],
-        data: comments,
-        label: 'Comments'
+        data: followers,
+        label: 'Followers'
       }
     ],
     options: {
@@ -180,14 +131,6 @@ const Sales = ({ className, state, ...rest }) => {
           id: 'A',
           type: 'linear',
           position: 'left',
-        }, {
-          id: 'B',
-          type: 'linear',
-          position: 'right',
-          ticks: {
-            max: 1,
-            min: 0
-          }
         }]
       }
     },
@@ -222,7 +165,7 @@ const Sales = ({ className, state, ...rest }) => {
           ticks: {
             fontColor: theme.palette.text.secondary,
             beginAtZero: true,
-            min: 0
+            min: 20000
           },
           gridLines: {
             borderDash: [2],
@@ -249,13 +192,20 @@ const Sales = ({ className, state, ...rest }) => {
     }
   };
 
-  return (
+  const showFollowers = () => {
+    if(state.platform !== 'all'){
+      return true;
+    }
+    return false;
+  }
+
+  const followerCard = (
     <Card
       className={clsx(classes.root, className)}
       {...rest}
     >
       <CardHeader
-        title="ENGAGEMENT TRENDS"
+        title="FOLLOWER TRENDS"
       />
       <Divider />
       <CardContent>
@@ -278,10 +228,12 @@ const Sales = ({ className, state, ...rest }) => {
       </Box>
     </Card>
   );
+
+  return showFollowers() ? followerCard : null;
 };
 
-Sales.propTypes = {
+Followers.propTypes = {
   className: PropTypes.string
 };
 
-export default Sales;
+export default Followers;

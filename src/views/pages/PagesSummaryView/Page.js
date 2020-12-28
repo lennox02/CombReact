@@ -12,13 +12,6 @@ import {
 } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import ThumbsUpIcon from '@material-ui/icons/ThumbUp';
-import HeartIcon from '@material-ui/icons/Favorite';
-import CareIcon from '@material-ui/icons/FavoriteBorder';
-import LaughIcon from '@material-ui/icons/SentimentVerySatisfied';
-import WowIcon from '@material-ui/icons/FlashOn';
-import SadIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import MadIcon from '@material-ui/icons/ThumbDown';
 
 const options = {
   rotations: 0,
@@ -150,14 +143,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Page = ({ className, icon, image, ...rest }) => {
+const Page = ({ className, icon, image, state, ...rest }) => {
   const classes = useStyles();
 
-  return (
+
+
+  const pageCard = (
+    <Grid
+      item
+      lg={6}
+      md={6}
+      xl={6}
+      xs={6}
+    >
     <Card
       className={clsx(classes.root, className)}
       {...rest}
     >
+      <a href="/app/page" style={{width: "100%", alignSelf: "center"}}>
       <CardContent>
         <Grid container spacing={3} alignItems="center">
           <Grid item>{icon === "Instagram" && <InstagramIcon style={{color: "#e4405f"}} />}{icon !== "Instagram" && <FacebookIcon style={{color: "#3b5998"}} />}</Grid>
@@ -165,9 +168,7 @@ const Page = ({ className, icon, image, ...rest }) => {
       </CardContent>
 
         <div style={{height: "200px", width: "100%", overflow: "hidden", display: "flex"}}>
-          <a href="/app/page" style={{width: "100%", alignSelf: "center"}}>
             <img alt={"Page1"} style={{width: "100%", alignSelf: "center"}} src={image} />
-          </a>
         </div>
 
       <CardContent>
@@ -181,7 +182,7 @@ const Page = ({ className, icon, image, ...rest }) => {
         {icon === "Instagram" &&
         <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>38.2k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></Grid>
+          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>38.2k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
         </Grid>
         }
@@ -198,8 +199,21 @@ const Page = ({ className, icon, image, ...rest }) => {
         <ReactWordcloud words={words} options={options} style={{height: "150px"}}/>
 
       </CardContent>
+      </a>
     </Card>
+    </Grid>
   );
+
+  let showPageCard = true;
+
+  if(state.platform === "instagram" && icon === "Facebook"){
+    showPageCard = false;
+  }
+  if(state.platform === "facebook" && icon === "Instagram"){
+    showPageCard = false;
+  }
+
+  return showPageCard ? pageCard : null;
 };
 
 Page.propTypes = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Container,
   Grid,
@@ -8,7 +8,8 @@ import Page from 'src/components/Page';
 import Sales from 'src/views/posts/PostsSummaryView/Sales';
 import Pages from './Pages';
 import PageCard from './Page';
-import Filters from 'src/views/posts/PostsSummaryView/Filters';
+import PageFilters from 'src/views/posts/PostsSummaryView/Filters';
+import Followers from 'src/views/posts/PostsSummaryView/Followers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,24 +20,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const PagesSummary = () => {
+
   const classes = useStyles();
 
-  const state = {showing: true}
+  const pagesState = {
+    platform: 'all',
+    reaction: 'all',
+    gender: 'all',
+    age: 'all',
+    time: 'month'
+  };
 
-  let d = new Date();
+  const [pageState, setPageState] = useState(pagesState);
 
-  const dates = [
-    d.setDate(d.getDate() - 1),
-    d.setDate(d.getDate() - 5),
-    d.setDate(d.getDate() - 8),
-    d.setDate(d.getDate() - 12),
-    d.setDate(d.getDate() - 15),
-    d.setDate(d.getDate() - 19),
-    d.setDate(d.getDate() - 22),
-    d.setDate(d.getDate() - 26)
-  ]
+  const pageCallbackFunction = (pageStateKey, pageStateVal) => {
+    setPageState({...pageState, [pageStateKey]: pageStateVal})
+  };
 
   return (
     <Page
@@ -47,6 +47,7 @@ const PagesSummary = () => {
         <Grid
           container
           spacing={3}
+          alignItems="flex-start"
         >
           <Grid
             item
@@ -55,7 +56,7 @@ const PagesSummary = () => {
             xl={12}
             xs={12}
           >
-            <Filters />
+            <PageFilters stateFilter={pageCallbackFunction} />
           </Grid>
           <Grid
             container
@@ -79,28 +80,16 @@ const PagesSummary = () => {
             >
               <Pages />
             </Grid>
-            {
-              state.showing ?
-                <Grid
-                  item
-                  lg={6}
-                  md={6}
-                  xl={6}
-                  xs={6}
-                >
-                  <PageCard icon={"Facebook"} image={"/static/images/facebook/page/dyson_banner.png"} />
-                </Grid>
-                : null
-            }
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xl={6}
-              xs={6}
-            >
-              <PageCard icon={"Instagram"} image={"/static/images/facebook/page/dyson_instagram_banner.png"} />
-            </Grid>
+            <PageCard
+              icon={"Facebook"}
+              image={"/static/images/facebook/page/dyson_banner.png"}
+              state={pageState}
+            />
+            <PageCard
+              icon={"Instagram"}
+              image={"/static/images/facebook/page/dyson_instagram_banner.png"}
+              state={pageState}
+            />
           </Grid>
           <Grid
             item
@@ -109,7 +98,9 @@ const PagesSummary = () => {
             xl={6}
             xs={12}
           >
-            <Sales />
+            <Sales state={pageState} />
+            <br />
+            <Followers state={pageState} />
           </Grid>
         </Grid>
       </Container>

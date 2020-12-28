@@ -31,11 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     color: theme.palette.primary.main,
+    borderBottom: "2px solid white",
     '& $title': {
       fontWeight: theme.typography.fontWeightMedium
     },
     '& $icon': {
-      color: theme.palette.primary.main
+      color: "white"
     }
   }
 }));
@@ -56,7 +57,16 @@ const NavItem = ({
       {...rest}
     >
       <Button
-        style={{color: "white"}}
+        style={
+          {
+            color: "white",
+            display: "block",
+            textAlign: "center",
+            marginBottom: "12px",
+            paddingBottom: "4px",
+            borderRadius: "0px"
+          }
+        }
         activeClassName={classes.active}
         className={classes.button}
         component={RouterLink}
@@ -64,10 +74,12 @@ const NavItem = ({
       >
         {Icon && (
           <Icon
+            style={{marginRight: "0px"}}
             className={classes.icon}
-            size="20"
+            size="24"
           />
         )}
+        <br />
         <span className={classes.title}>
           {title}
         </span>

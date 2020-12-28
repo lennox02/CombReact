@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Box,
   Card, CardHeader,
   Container, Divider,
   Grid,
@@ -8,7 +7,6 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Results from './Results';
-import Toolbar from './Toolbar';
 import data from './data';
 import Filters from "../../posts/PostsSummaryView/Filters";
 import ReactWordcloud from "react-wordcloud";
@@ -138,6 +136,21 @@ const CustomerListView = () => {
   const classes = useStyles();
   const [customers] = useState(data);
 
+  const pageDetailState = {
+    platform: 'all',
+    reaction: 'all',
+    gender: 'all',
+    age: 'all',
+    time: 'month'
+  };
+
+  const [pageState, setPageState] = useState(pageDetailState);
+
+
+  const callbackFunction = (key, val) => {
+    setPageState({...pageState, [key]: val})
+  }
+
   return (
     <Page
       className={classes.root}
@@ -152,7 +165,7 @@ const CustomerListView = () => {
             xl={12}
             xs={12}
           >
-            <Filters />
+            <Filters stateFilter={callbackFunction} />
           </Grid>
           <Grid
             item

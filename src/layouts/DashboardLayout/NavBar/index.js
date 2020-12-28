@@ -27,12 +27,12 @@ const items = [
   {
     href: '/app/posts',
     icon: TrelloIcon,
-    title: 'Posts'
+    title: 'Posts Summary'
   },
   {
     href: '/app/pages',
     icon: LayoutIcon,
-    title: 'Pages'
+    title: 'Accounts & Pages'
   }
 ];
 
