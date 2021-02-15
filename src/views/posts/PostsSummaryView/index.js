@@ -98,49 +98,49 @@ const PostsSummary = () => {
             </Grid>
             <Post
               icon={"Facebook"}
-              image={"/static/images/facebook/post/post_1.jpg"}
+              image={"/static/images/facebook/post/insta_post_1.jpg"}
               date={dates[0]}
               state={postState}
             />
             <Post
               icon={"Instagram"}
-              image={"/static/images/facebook/post/post_2.jpg"}
+              image={"/static/images/facebook/post/insta_post_2.jpg"}
               date={dates[1]}
               state={postState}
             />
             <Post
               icon={"Facebook"}
-              image={"/static/images/facebook/post/post_3.jpg"}
+              image={"/static/images/facebook/post/insta_post_3.jpg"}
               date={dates[2]}
               state={postState}
             />
             <Post
               icon={"Instagram"}
-              image={"/static/images/facebook/post/post_4.jpg"}
+              image={"/static/images/facebook/post/insta_post_4.jpg"}
               date={dates[3]}
               state={postState}
             />
             <Post
               icon={"Facebook"}
-              image={"/static/images/facebook/post/post_5.jpg"}
+              image={"/static/images/facebook/post/insta_post_5.jpg"}
               date={dates[4]}
               state={postState}
             />
             <Post
               icon={"Instagram"}
-              image={"/static/images/facebook/post/post_6.png"}
+              image={"/static/images/facebook/post/insta_post_6.jpg"}
               date={dates[5]}
               state={postState}
             />
             <Post
               icon={"Facebook"}
-              image={"/static/images/facebook/post/post_7.jpg"}
+              image={"/static/images/facebook/post/insta_post_7.jpg"}
               date={dates[6]}
               state={postState}
             />
             <Post
               icon={"Instagram"}
-              image={"/static/images/facebook/post/post_8.jpg"}
+              image={"/static/images/facebook/post/insta_post_8.jpg"}
               date={dates[7]}
               state={postState}
             />

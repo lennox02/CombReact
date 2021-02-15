@@ -23,8 +23,8 @@ const states = [
     label: 'New York'
   },
   {
-    value: 'san-francisco',
-    label: 'San Francisco'
+    value: 'california',
+    label: 'California'
   }
 ];
 
@@ -35,11 +35,11 @@ const useStyles = makeStyles(() => ({
 const ProfileDetails = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
+    firstName: 'Jade',
+    lastName: 'Roper',
+    email: 'jaderoper@gmail.com',
     phone: '',
-    state: 'Alabama',
+    state: 'california',
     country: 'USA'
   });
 

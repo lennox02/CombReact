@@ -82,12 +82,12 @@ const PagesSummary = () => {
             </Grid>
             <PageCard
               icon={"Facebook"}
-              image={"/static/images/facebook/page/dyson_banner.png"}
+              image={"/static/images/facebook/page/jade_facebook_banner.jpg"}
               state={pageState}
             />
             <PageCard
               icon={"Instagram"}
-              image={"/static/images/facebook/page/dyson_instagram_banner.png"}
+              image={"/static/images/avatars/jade_roper_avatar.jpg"}
               state={pageState}
             />
           </Grid>

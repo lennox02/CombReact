@@ -18,108 +18,108 @@ const options = {
 
 const words = [
   {
-    text: 'vaccum',
-    value: 14,
+    text: 'day',
+    value: 16,
   },
   {
-    text: 'dyson',
-    value: 14,
-  },
-  {
-    text: 'no',
-    value: 10,
-  },
-  {
-    text: 'back',
-    value: 10,
-  },
-  {
-    text: 'service',
+    text: 'first',
     value: 9,
   },
   {
-    text: 'customer',
+    text: 'emmy',
     value: 9,
   },
   {
-    text: 'email',
+    text: 'preschool',
     value: 7,
   },
   {
-    text: 'bought',
+    text: 'great',
     value: 7,
   },
   {
-    text: 'year',
+    text: 'school',
     value: 6,
   },
   {
-    text: 'still',
+    text: 'adorable',
     value: 6,
   },
   {
-    text: 'send',
-    value: 6,
-  },
-  {
-    text: 'replacement',
+    text: 'hope',
     value: 5,
   },
   {
-    text: 'one',
+    text: 'good',
     value: 5,
   },
   {
-    text: 'money',
+    text: 'fun',
     value: 5,
   },
   {
-    text: 'filter',
+    text: 'cute',
     value: 5,
   },
   {
-    text: 'few',
-    value: 5,
-  },
-  {
-    text: 'even',
-    value: 5,
-  },
-  {
-    text: 'charge',
-    value: 5,
-  },
-  {
-    text: 'again',
-    value: 5,
-  },
-  {
-    text: 'weeks',
+    text: 'sweet',
     value: 4,
   },
   {
-    text: 'times',
+    text: 'luck',
     value: 4,
   },
   {
-    text: 'stopped',
+    text: 'precious',
     value: 4,
   },
   {
-    text: 'times',
-    value: 4,
+    text: 'exciting',
+    value: 3,
   },
   {
-    text: 'several',
-    value: 4,
+    text: 'bless',
+    value: 3,
   },
   {
-    text: 'sale',
-    value: 4,
+    text: 'best',
+    value: 3,
   },
   {
-    text: 'said',
-    value: 4,
+    text: 'all',
+    value: 3,
+  },
+  {
+    text: 'absolutely',
+    value: 3,
+  },
+  {
+    text: 'wonderful',
+    value: 2,
+  },
+  {
+    text: 'teacher',
+    value: 2,
+  },
+  {
+    text: 'old',
+    value: 2,
+  },
+  {
+    text: 'heart',
+    value: 2,
+  },
+  {
+    text: 'happy',
+    value: 2,
+  },
+  {
+    text: 'growing',
+    value: 2,
+  },
+  {
+    text: 'fast',
+    value: 2,
   },
 ];
 

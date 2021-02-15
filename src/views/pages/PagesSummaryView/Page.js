@@ -20,108 +20,215 @@ const options = {
 
 const words = [
   {
-    text: 'vaccum',
-    value: 14,
+    text: 'day',
+    value: 16,
   },
   {
-    text: 'dyson',
-    value: 14,
-  },
-  {
-    text: 'no',
-    value: 10,
-  },
-  {
-    text: 'back',
-    value: 10,
-  },
-  {
-    text: 'service',
+    text: 'first',
     value: 9,
   },
   {
-    text: 'customer',
+    text: 'emmy',
     value: 9,
   },
   {
-    text: 'email',
+    text: 'preschool',
     value: 7,
   },
   {
-    text: 'bought',
+    text: 'great',
     value: 7,
   },
   {
-    text: 'year',
+    text: 'school',
     value: 6,
   },
   {
-    text: 'still',
+    text: 'adorable',
     value: 6,
   },
   {
-    text: 'send',
+    text: 'hope',
+    value: 5,
+  },
+  {
+    text: 'good',
+    value: 5,
+  },
+  {
+    text: 'fun',
+    value: 5,
+  },
+  {
+    text: 'cute',
+    value: 5,
+  },
+  {
+    text: 'sweet',
+    value: 4,
+  },
+  {
+    text: 'luck',
+    value: 4,
+  },
+  {
+    text: 'precious',
+    value: 4,
+  },
+  {
+    text: 'exciting',
+    value: 3,
+  },
+  {
+    text: 'bless',
+    value: 3,
+  },
+  {
+    text: 'best',
+    value: 3,
+  },
+  {
+    text: 'all',
+    value: 3,
+  },
+  {
+    text: 'absolutely',
+    value: 3,
+  },
+  {
+    text: 'wonderful',
+    value: 2,
+  },
+  {
+    text: 'teacher',
+    value: 2,
+  },
+  {
+    text: 'old',
+    value: 2,
+  },
+  {
+    text: 'heart',
+    value: 2,
+  },
+  {
+    text: 'happy',
+    value: 2,
+  },
+  {
+    text: 'growing',
+    value: 2,
+  },
+  {
+    text: 'fast',
+    value: 2,
+  },
+];
+
+const words2 = [
+  {
+    text: 'beautiful',
+    value: 7,
+  },
+  {
+    text: 'hair',
     value: 6,
   },
   {
-    text: 'replacement',
+    text: 'emmy',
+    value: 6,
+  },
+  {
+    text: 'cute',
     value: 5,
   },
   {
-    text: 'one',
+    text: 'love',
     value: 5,
   },
   {
-    text: 'money',
-    value: 5,
-  },
-  {
-    text: 'filter',
-    value: 5,
-  },
-  {
-    text: 'few',
-    value: 5,
-  },
-  {
-    text: 'even',
-    value: 5,
-  },
-  {
-    text: 'charge',
-    value: 5,
-  },
-  {
-    text: 'again',
-    value: 5,
-  },
-  {
-    text: 'weeks',
+    text: 'precious',
     value: 4,
   },
   {
-    text: 'times',
-    value: 4,
+    text: 'mullet',
+    value: 3,
   },
   {
-    text: 'stopped',
-    value: 4,
+    text: 'reed',
+    value: 3,
   },
   {
-    text: 'times',
-    value: 4,
+    text: 'think',
+    value: 3,
   },
   {
-    text: 'several',
-    value: 4,
+    text: 'thing',
+    value: 3,
   },
   {
-    text: 'sale',
-    value: 4,
+    text: 'omg',
+    value: 3,
   },
   {
-    text: 'said',
-    value: 4,
+    text: 'kiddos',
+    value: 3,
+  },
+  {
+    text: 'lucky',
+    value: 2,
+  },
+  {
+    text: 'week',
+    value: 2,
+  },
+  {
+    text: 'exciting',
+    value: 2,
+  },
+  {
+    text: 'most',
+    value: 2,
+  },
+  {
+    text: 'more',
+    value: 2,
+  },
+  {
+    text: 'cutest',
+    value: 2,
+  },
+  {
+    text: 'seen',
+    value: 2,
+  },
+  {
+    text: 'young',
+    value: 2,
+  },
+  {
+    text: 'sweethearts',
+    value: 2,
+  },
+  {
+    text: 'unique',
+    value: 2,
+  },
+  {
+    text: 'thank',
+    value: 2,
+  },
+  {
+    text: 'happy',
+    value: 2,
+  },
+  {
+    text: 'strong',
+    value: 2,
+  },
+  {
+    text: 'growing',
+    value: 2,
   },
 ];
 
@@ -173,30 +280,45 @@ const Page = ({ className, icon, image, state, ...rest }) => {
 
       <CardContent>
 
+        {icon === "Instagram" &&
         <Typography variant="subtitle2">
-          Dyson - Empowering the Home
+          Jade Roper Tolbert
+          Motherhood | Creating my own path | Emmy & Brooks & Reed | 💍 @tanner.tolbert | 🎙 @mommiestellall | 📩 paul@cegtalent.com
         </Typography>
+        }
+        {icon !== "Instagram" &&
+        <Typography variant="subtitle2">
+          @jadeelizabethroper
+          Official FB page of Jade Elizabeth Roper
+        </Typography>
+        }
+
 
         <br />
 
         {icon === "Instagram" &&
         <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>38.2k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
+          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>1.5m</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
         </Grid>
         }
         {icon !== "Instagram" &&
           <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
             <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-            <Grid item lg={2} sm={2} xl={2} xs={2} ><div>50.1k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></Grid>
+            <Grid item lg={2} sm={2} xl={2} xs={2} ><div>244.1k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></Grid>
             <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
           </Grid>
         }
 
         <hr style={{color: "grey", backgroundColor: "grey"}} />
 
+        {icon === "Instagram" &&
+        <ReactWordcloud words={words2} options={options} style={{height: "150px"}}/>
+        }
+        {icon !== "Instagram" &&
         <ReactWordcloud words={words} options={options} style={{height: "150px"}}/>
+        }
 
       </CardContent>
       </a>

@@ -20,110 +20,218 @@ const options = {
 
 const words = [
   {
-    text: 'vaccum',
-    value: 14,
+    text: 'day',
+    value: 16,
   },
   {
-    text: 'dyson',
-    value: 14,
-  },
-  {
-    text: 'no',
-    value: 10,
-  },
-  {
-    text: 'back',
-    value: 10,
-  },
-  {
-    text: 'service',
+    text: 'first',
     value: 9,
   },
   {
-    text: 'customer',
+    text: 'emmy',
     value: 9,
   },
   {
-    text: 'email',
+    text: 'preschool',
     value: 7,
   },
   {
-    text: 'bought',
+    text: 'great',
     value: 7,
   },
   {
-    text: 'year',
+    text: 'school',
     value: 6,
   },
   {
-    text: 'still',
+    text: 'adorable',
     value: 6,
   },
   {
-    text: 'send',
-    value: 6,
-  },
-  {
-    text: 'replacement',
+    text: 'hope',
     value: 5,
   },
   {
-    text: 'one',
+    text: 'good',
     value: 5,
   },
   {
-    text: 'money',
+    text: 'fun',
     value: 5,
   },
   {
-    text: 'filter',
+    text: 'cute',
     value: 5,
   },
   {
-    text: 'few',
-    value: 5,
-  },
-  {
-    text: 'even',
-    value: 5,
-  },
-  {
-    text: 'charge',
-    value: 5,
-  },
-  {
-    text: 'again',
-    value: 5,
-  },
-  {
-    text: 'weeks',
+    text: 'sweet',
     value: 4,
   },
   {
-    text: 'times',
+    text: 'luck',
     value: 4,
   },
   {
-    text: 'stopped',
+    text: 'precious',
     value: 4,
   },
   {
-    text: 'times',
-    value: 4,
+    text: 'exciting',
+    value: 3,
   },
   {
-    text: 'several',
-    value: 4,
+    text: 'bless',
+    value: 3,
   },
   {
-    text: 'sale',
-    value: 4,
+    text: 'best',
+    value: 3,
   },
   {
-    text: 'said',
-    value: 4,
+    text: 'all',
+    value: 3,
+  },
+  {
+    text: 'absolutely',
+    value: 3,
+  },
+  {
+    text: 'wonderful',
+    value: 2,
+  },
+  {
+    text: 'teacher',
+    value: 2,
+  },
+  {
+    text: 'old',
+    value: 2,
+  },
+  {
+    text: 'heart',
+    value: 2,
+  },
+  {
+    text: 'happy',
+    value: 2,
+  },
+  {
+    text: 'growing',
+    value: 2,
+  },
+  {
+    text: 'fast',
+    value: 2,
   },
 ];
+
+const words2 = [
+  {
+    text: 'beautiful',
+    value: 7,
+  },
+  {
+    text: 'hair',
+    value: 6,
+  },
+  {
+    text: 'emmy',
+    value: 6,
+  },
+  {
+    text: 'cute',
+    value: 5,
+  },
+  {
+    text: 'love',
+    value: 5,
+  },
+  {
+    text: 'precious',
+    value: 4,
+  },
+  {
+    text: 'mullet',
+    value: 3,
+  },
+  {
+    text: 'reed',
+    value: 3,
+  },
+  {
+    text: 'think',
+    value: 3,
+  },
+  {
+    text: 'thing',
+    value: 3,
+  },
+  {
+    text: 'omg',
+    value: 3,
+  },
+  {
+    text: 'kiddos',
+    value: 3,
+  },
+  {
+    text: 'lucky',
+    value: 2,
+  },
+  {
+    text: 'week',
+    value: 2,
+  },
+  {
+    text: 'exciting',
+    value: 2,
+  },
+  {
+    text: 'most',
+    value: 2,
+  },
+  {
+    text: 'more',
+    value: 2,
+  },
+  {
+    text: 'cutest',
+    value: 2,
+  },
+  {
+    text: 'seen',
+    value: 2,
+  },
+  {
+    text: 'young',
+    value: 2,
+  },
+  {
+    text: 'sweethearts',
+    value: 2,
+  },
+  {
+    text: 'unique',
+    value: 2,
+  },
+  {
+    text: 'thank',
+    value: 2,
+  },
+  {
+    text: 'happy',
+    value: 2,
+  },
+  {
+    text: 'strong',
+    value: 2,
+  },
+  {
+    text: 'growing',
+    value: 2,
+  },
+];
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -237,7 +345,12 @@ const Post = ({ className, icon, image, date, time, state, ...rest }) => {
       <CardContent>
 
         <Typography variant="subtitle2">
-          Dyson cordless vacuums are engineered with powerful whole-machine filtration...
+        {icon === "Instagram" &&
+          "Can’t believe I get to keep them. 😍😍😍"
+        }
+        {icon !== "Instagram" &&
+          "Our baby is growing up and doing big things!!! Off to..."
+        }
         </Typography>
 
         <br />
@@ -245,26 +358,31 @@ const Post = ({ className, icon, image, date, time, state, ...rest }) => {
         {icon === "Instagram" &&
         <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>{Math.round(4.2 * modNum() * 10) / 10}k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
+          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>{Math.round(540.2 * modNum() * 10) / 10}k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
         </Grid>
         }
         {icon !== "Instagram" &&
           <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('like') && <div><div>{Math.round(4.1 * modNum() * 10) / 10}k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('love') && <div><div>{Math.round(1.1 * modNum() * 10) / 10}k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('care') && <div><div>{Math.round(208 * modNum())}</div><img alt={"care"} src={'/static/images/facebook/icons/care.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('laugh') && <div><div>{Math.round(458 * modNum())}</div><img alt={"haha"} src={'/static/images/facebook/icons/happy.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('wow') && <div><div>{Math.round(103 * modNum())}</div><img alt={"wow"} src={'/static/images/facebook/icons/wow.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('sad') && <div><div>{Math.round(721 * modNum())}</div><img alt={"sad"} src={'/static/images/facebook/icons/sad.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "18px", paddingRight: "18px"}}>{showEmote('angry') && <div><div>{Math.round(3.3 * modNum() * 10) / 10}k</div><img alt={"mad"} src={'/static/images/facebook/icons/anger.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('like') && <div><div>{Math.round(41.4 * modNum() * 10) / 10}k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('love') && <div><div>{Math.round(11.3 * modNum() * 10) / 10}k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('care') && <div><div>{Math.round(2.1 * modNum() * 10) / 10}k</div><img alt={"care"} src={'/static/images/facebook/icons/care.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('laugh') && <div><div>{Math.round(4.5 * modNum() * 10) / 10}k</div><img alt={"haha"} src={'/static/images/facebook/icons/happy.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('wow') && <div><div>{Math.round(904 * modNum())}</div><img alt={"wow"} src={'/static/images/facebook/icons/wow.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('sad') && <div><div>{Math.round(7.2 * modNum() * 10) / 10}k</div><img alt={"sad"} src={'/static/images/facebook/icons/sad.png'} /></div>}</Grid>
+            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('angry') && <div><div>{Math.round(33.5 * modNum() * 10) / 10}k</div><img alt={"mad"} src={'/static/images/facebook/icons/anger.png'} /></div>}</Grid>
             <Grid item lg={1} sm={1} xl={1} xs={1}></Grid>
           </Grid>
         }
 
         <hr style={{color: "grey", backgroundColor: "grey"}} />
 
+        {icon === "Instagram" &&
+        <ReactWordcloud words={words2} options={options} style={{height: "150px"}}/>
+        }
+        {icon !== "Instagram" &&
         <ReactWordcloud words={words} options={options} style={{height: "150px"}}/>
+        }
 
       </CardContent>
       </a>

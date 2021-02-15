@@ -15,11 +15,11 @@ import {
 } from '@material-ui/core';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
+  avatar: '/static/images/avatars/jade_roper_avatar.jpg',
   city: 'Los Angeles',
   country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
+  jobTitle: 'Model',
+  name: 'Jade Roper',
   timezone: 'GTM-7'
 };
 
