@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
@@ -12,6 +12,7 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
+import Post from "./Post";
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -21,143 +22,48 @@ const Sales = ({ className, state, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  const getCalcDate = (days) => {
-    let d = new Date();
+  const commentsFetched = false;
+  const [CommentsFetchedState, setCommentsFetchedState] = useState(commentsFetched);
 
-    d.setDate(d.getDate() - days)
+  const comments = [];
+  const [commentsState, setCommentsState] = useState(comments);
 
-    return d.getDate() + " " + monthNames[d.getMonth()];
-  }
+  const dates = [];
+  const [datesState, setDatesState] = useState(dates);
 
-  let views = [];
-  let comments = [];
-  let dates = [];
-
-  const modNum = () => {
-    let mod = 1;
-    if(state.gender !== "all"){
-      mod = mod * 0.5;
-    }
-
-    if(state.age === "18"){
-      mod = mod * 0.20;
-    } else if(state.age === "30"){
-      mod = mod * 0.35;
-    } else if(state.age === "40"){
-      mod = mod * 0.40;
-    } else if(state.age === "60"){
-      mod = mod * 0.05;
-    }
-
-    if(state.reaction === "like"){
-      mod = mod * 0.2;
-    } else if(state.reaction === "love"){
-      mod = mod * 0.05;
-    } else if(state.reaction === "care"){
-      mod = mod * 0.01;
-    } else if(state.reaction === "laugh"){
-      mod = mod * 0.02;
-    } else if(state.reaction === "wow"){
-      mod = mod * 0.005;
-    } else if(state.reaction === "sad"){
-      mod = mod * 0.03;
-    } else if(state.reaction === "angry"){
-      mod = mod * 0.15;
-    }
-
-    return mod;
-  }
-
-  let mod = modNum();
-  let ig = 1;
-  let fb = 1;
-  if(state.platform === 'facebook'){
-    ig = 0.1;
-  } else if(state.platform === 'instagram'){
-    fb = 0.1;
-  }
-
-  views = [
-    12640 * mod,
-    180140 * mod * fb,
-    10810 * mod,
-    10990 * mod,
-    548330 * mod * ig,
-    32080 * mod,
-    19780 * mod,
-    12640 * mod,
-    190133 * mod * fb,
-    10810 * mod,
-    10990 * mod,
-    508330 * mod * ig,
-    32080 * mod,
-    19780 * mod,
-    12640 * mod,
-    189995 * mod * fb,
-    10810 * mod,
-    10990 * mod,
-    568330 * mod * ig,
-    32080 * mod,
-    19780 * mod,
-    12640 * mod,
-    171140 * mod * fb,
-    10810 * mod,
-    10990 * mod,
-    558330 * mod * ig,
-    32080 * mod,
-    19780 * mod,
-    12640 * mod,
-    284548 * mod * fb
-  ];
-  comments = [
-    1010 * mod,
-    31340 * mod * fb,
-    640 * mod,
-    890 * mod,
-    51119 * mod * ig,
-    4080 * mod,
-    1900 * mod,
-    1010 * mod,
-    31340 * mod * fb,
-    640 * mod,
-    890 * mod,
-    50123 * mod * ig,
-    4080 * mod,
-    1900 * mod,
-    1010 * mod,
-    31340 * mod * fb,
-    640 * mod,
-    890 * mod,
-    51230 * mod * ig,
-    4080 * mod,
-    1900 * mod,
-    1010 * mod,
-    31340 * mod * fb,
-    640 * mod,
-    890 * mod,
-    53218 * mod * ig,
-    4080 * mod,
-    1900 * mod,
-    1010 * mod,
-    45340 * mod * fb
-  ];
-  dates = [];
-  for (let i = 30; i >= 1; i--) {
-    dates.push(getCalcDate(i))
-  }
-
-  if(state.time === "week"){
-    views.splice(0, 23);
-    comments.splice(0, 23);
-    dates.splice(0, 23);
-  }
-
-  // round graph values
-  for(let i=0;i<views.length;i++){
-    views[i] = Math.round(views[i]);
-    comments[i] = Math.round(comments[i]);
+  if(CommentsFetchedState === false) {
+    fetch(
+      'http://localhost/CombLaravel/public/commentCounts',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"userId": localStorage.getItem('user_id')})
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        if (json.data) {
+          console.log(json.data);
+          let tempComments = [];
+          let tempDates = [];
+          for(let i = 0; i < json.data.length; i++){
+            tempComments.push(json.data[i].comment_count);
+            tempDates.push(json.data[i].date);
+          }
+          console.log(tempComments);
+          console.log(tempDates);
+          setCommentsState(tempComments);
+          setDatesState(tempDates);
+        } else {
+          console.log("fail");
+        }
+        setCommentsFetchedState(true);
+      });
   }
 
 
@@ -165,12 +71,7 @@ const Sales = ({ className, state, ...rest }) => {
     datasets: [
       {
         backgroundColor: colors.blue[500],
-        data: views,
-        label: 'Views'
-      },
-      {
-        backgroundColor: colors.indigo[400],
-        data: comments,
+        data: commentsState,
         label: 'Comments'
       }
     ],
@@ -180,18 +81,10 @@ const Sales = ({ className, state, ...rest }) => {
           id: 'A',
           type: 'linear',
           position: 'left',
-        }, {
-          id: 'B',
-          type: 'linear',
-          position: 'right',
-          ticks: {
-            max: 1,
-            min: 0
-          }
         }]
       }
     },
-    labels: dates
+    labels: datesState
   };
 
   const options = {

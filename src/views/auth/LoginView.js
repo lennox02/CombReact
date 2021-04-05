@@ -1,4 +1,5 @@
 import React from 'react';
+import FacebookLogin from 'react-facebook-login';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -43,16 +44,44 @@ const LoginView = () => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: 'ed@combanalytics.com',
-              password: 'Ed78$123'
+              email: 'james@combanalytics.com',
+              password: 'admin123'
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
-            onSubmit={() => {
-              navigate('/app/posts', { replace: true });
-            }}
+            onSubmit={
+              (values, {resetForm, setStatus}) => {
+                fetch(
+                  'http://localhost/CombLaravel/public/login',
+                  {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(values)
+                  }
+                )
+                .then(res => res.json())
+                .then(json => {
+                  if(json.access_token){
+                    localStorage.setItem('token', json.access_token);
+                    localStorage.setItem('user_id', json.user.id);
+                    localStorage.setItem('user_img', json.user.img_url);
+                    localStorage.setItem('user_email', json.user.email);
+                    localStorage.setItem('user_name', json.user.name);
+                    localStorage.setItem('user_handle', json.user.handle);
+                    console.log(localStorage.getItem('token'));
+                    navigate('/app/posts', { replace: true });
+                  } else {
+                    resetForm(values);
+                    setStatus({submit: "Incorrect Login"})
+                  }
+                })
+              }
+            }
           >
             {({
               errors,

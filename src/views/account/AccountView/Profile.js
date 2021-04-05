@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -11,15 +11,17 @@ import {
   CardContent,
   Divider,
   Typography,
-  makeStyles
+  makeStyles, Container
 } from '@material-ui/core';
+import FacebookLogin from "react-facebook-login";
+import {useNavigate} from "react-router-dom";
 
 const user = {
-  avatar: '/static/images/avatars/jade_roper_avatar.jpg',
+  avatar: localStorage.getItem('user_img'),
   city: 'Los Angeles',
   country: 'USA',
   jobTitle: 'Model',
-  name: 'Jade Roper',
+  name: localStorage.getItem('user_name'),
   timezone: 'GTM-7'
 };
 
@@ -33,6 +35,28 @@ const useStyles = makeStyles(() => ({
 
 const Profile = ({ className, ...rest }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const profileFetched = false;
+  const [profileFetchedState, setProfileFetchedState] = useState(profileFetched);
+
+
+  const responseFacebook = (response) => {
+    fetch(
+      'http://localhost/CombLaravel/public/facebook',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({fbToken: response.accessToken, id: response.id, userId: localStorage.getItem('user_id')})
+      }
+    ).then(navigate('/app/posts', { replace: true }));
+    console.log(response);
+    console.log({fbToken: response.accessToken, id: response.id, user_id: localStorage.getItem('user_id')});
+  }
 
   return (
     <Card
@@ -81,6 +105,15 @@ const Profile = ({ className, ...rest }) => {
           Upload picture
         </Button>
       </CardActions>
+      <Divider />
+      <FacebookLogin
+        appId="704761290204404"
+        autoLoad={false}
+        fields="name,email,picture"
+        textButton="Connect Facebook"
+        scope="public_profile,email,pages_read_user_content,pages_show_list,pages_read_engagement,instagram_basic"
+        callback={responseFacebook}
+      />
     </Card>
   );
 };

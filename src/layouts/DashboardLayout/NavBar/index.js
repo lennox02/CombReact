@@ -18,9 +18,9 @@ import {
 import NavItem from './NavItem';
 
 const user = {
-  avatar: '/static/images/avatars/jade_roper_avatar.jpg',
-  jobTitle: '@jadelizroper',
-  name: 'Jade Roper'
+  avatar: localStorage.getItem('user_img'),
+  jobTitle: localStorage.getItem('user_handle'),
+  name: localStorage.getItem('user_name')
 };
 
 const items = [

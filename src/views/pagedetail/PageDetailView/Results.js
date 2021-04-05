@@ -17,6 +17,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import getInitials from 'src/utils/getInitials';
+import ReactHighlightWords from "react-highlight-words";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -25,11 +26,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, customers, ...rest }) => {
+const Results = ({ className, customers, word, ...rest }) => {
   const classes = useStyles();
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+
+  let highlightWord = "";
+
+  if(typeof word === 'string'){
+    highlightWord = word;
+  }
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -126,13 +133,13 @@ const Results = ({ className, customers, ...rest }) => {
                         className={classes.avatar}
                         src={customer.avatarUrl}
                       >
-                        {getInitials(customer.name)}
+                        {customer.site_user ? getInitials(customer.site_user) : ''}
                       </Avatar>
                       <Typography
                         color="textPrimary"
                         variant="body1"
                       >
-                        {customer.name}
+                        {customer.site_user}
                       </Typography>
                     </Box>
                   </TableCell>
@@ -140,7 +147,7 @@ const Results = ({ className, customers, ...rest }) => {
                     {customer.reaction}
                   </TableCell>
                   <TableCell>
-                    {customer.comment}
+                    <ReactHighlightWords searchWords={[highlightWord]} autoEscape={true} textToHighlight={customer.message} />
                   </TableCell>
                 </TableRow>
               ))}

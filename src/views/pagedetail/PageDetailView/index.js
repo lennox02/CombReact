@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link, useLocation, BrowserRouter as Router } from "react-router-dom";
+import queryString from 'query-string'
 import {
   Card, CardHeader,
   Container, Divider,
@@ -7,7 +9,6 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Results from './Results';
-import data from './data';
 import Filters from "../../posts/PostsSummaryView/Filters";
 import ReactWordcloud from "react-wordcloud";
 
@@ -15,113 +16,6 @@ const options = {
   rotations: 0,
   fontSizes: [24,84]
 };
-
-const words = [
-  {
-    text: 'day',
-    value: 16,
-  },
-  {
-    text: 'first',
-    value: 9,
-  },
-  {
-    text: 'emmy',
-    value: 9,
-  },
-  {
-    text: 'preschool',
-    value: 7,
-  },
-  {
-    text: 'great',
-    value: 7,
-  },
-  {
-    text: 'school',
-    value: 6,
-  },
-  {
-    text: 'adorable',
-    value: 6,
-  },
-  {
-    text: 'hope',
-    value: 5,
-  },
-  {
-    text: 'good',
-    value: 5,
-  },
-  {
-    text: 'fun',
-    value: 5,
-  },
-  {
-    text: 'cute',
-    value: 5,
-  },
-  {
-    text: 'sweet',
-    value: 4,
-  },
-  {
-    text: 'luck',
-    value: 4,
-  },
-  {
-    text: 'precious',
-    value: 4,
-  },
-  {
-    text: 'exciting',
-    value: 3,
-  },
-  {
-    text: 'bless',
-    value: 3,
-  },
-  {
-    text: 'best',
-    value: 3,
-  },
-  {
-    text: 'all',
-    value: 3,
-  },
-  {
-    text: 'absolutely',
-    value: 3,
-  },
-  {
-    text: 'wonderful',
-    value: 2,
-  },
-  {
-    text: 'teacher',
-    value: 2,
-  },
-  {
-    text: 'old',
-    value: 2,
-  },
-  {
-    text: 'heart',
-    value: 2,
-  },
-  {
-    text: 'happy',
-    value: 2,
-  },
-  {
-    text: 'growing',
-    value: 2,
-  },
-  {
-    text: 'fast',
-    value: 2,
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,9 +26,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+let fetched = false;
+
 const CustomerListView = () => {
   const classes = useStyles();
-  const [customers] = useState(data);
+  const data = [];
+  const [customers, setCustomers] = useState(data);
+  const [word, setWord] = useState(data);
+  const postId = queryString.parse(useLocation().search).id;
+  const words = JSON.parse(localStorage.getItem('post_cloud_' + postId));
 
   const pageDetailState = {
     platform: 'all',
@@ -149,6 +49,62 @@ const CustomerListView = () => {
 
   const callbackFunction = (key, val) => {
     setPageState({...pageState, [key]: val})
+  }
+
+  if(fetched === false) {
+    fetch(
+      'http://localhost/CombLaravel/public/facebookPostComments',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"postId": postId})
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        if (json) {
+          console.log(localStorage.getItem('token'));
+          console.log(json);
+          setCustomers(json);
+          fetched = true;
+        } else {
+          console.log("fail");
+        }
+      });
+  }
+
+  const search = (word) => {
+    fetch(
+      'http://localhost/CombLaravel/public/facebookPostComments',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"postId": postId, "word": word})
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        if (json) {
+          console.log(localStorage.getItem('token'));
+          console.log(json);
+          setCustomers(json);
+          setWord(word);
+        } else {
+          console.log("fail");
+        }
+      });
+  }
+
+  const callback = {
+    onWordClick: word => search(word.text)
   }
 
   return (
@@ -179,7 +135,7 @@ const CustomerListView = () => {
                 title="WORDCLOUD"
               />
               <Divider />
-              <ReactWordcloud words={words} options={options} />
+              <ReactWordcloud callbacks={callback} words={words} options={options} />
             </Card>
           </Grid>
           <Grid
@@ -194,7 +150,7 @@ const CustomerListView = () => {
                 title="COMMENTS"
               />
               <Divider />
-              <Results customers={customers} />
+              <Results customers={customers} word={word} />
             </Card>
           </Grid>
         </Grid>

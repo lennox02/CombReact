@@ -33,10 +33,52 @@ const PagesSummary = () => {
   };
 
   const [pageState, setPageState] = useState(pagesState);
-
   const pageCallbackFunction = (pageStateKey, pageStateVal) => {
     setPageState({...pageState, [pageStateKey]: pageStateVal})
   };
+
+  const apiPages = [];
+  const [apiPagesState, setApiPagesState] = useState(apiPages);
+
+  const pgFetched = false;
+  const [pgFetchedState, setPgFetchedState] = useState(pgFetched);
+
+  console.log(pgFetchedState);
+
+  if(pgFetchedState === false) {
+    fetch(
+      'http://localhost/CombLaravel/public/facebookPages',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"userId": 1})
+      }
+    )
+    .then(res => res.json())
+    .then(json => {
+      if (json) {
+        let items = [];
+        for (let i = 0; i < json.length; i++) {
+          let obj = json[i];
+
+          items.push(<PageCard
+            name={obj.name}
+            icon={obj.site}
+            image={obj.img_url}
+            state={pageState}
+          />);
+        }
+        setApiPagesState(items);
+      } else {
+        console.log("fail");
+      }
+      setPgFetchedState(true);
+    });
+  }
 
   return (
     <Page
@@ -80,16 +122,7 @@ const PagesSummary = () => {
             >
               <Pages />
             </Grid>
-            <PageCard
-              icon={"Facebook"}
-              image={"/static/images/facebook/page/jade_facebook_banner.jpg"}
-              state={pageState}
-            />
-            <PageCard
-              icon={"Instagram"}
-              image={"/static/images/avatars/jade_roper_avatar.jpg"}
-              state={pageState}
-            />
+            {apiPagesState}
           </Grid>
           <Grid
             item

@@ -250,10 +250,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Page = ({ className, icon, image, state, ...rest }) => {
+const Page = ({ className, name, icon, image, state, ...rest }) => {
   const classes = useStyles();
-
-
 
   const pageCard = (
     <Grid
@@ -275,24 +273,14 @@ const Page = ({ className, icon, image, state, ...rest }) => {
       </CardContent>
 
         <div style={{height: "200px", width: "100%", overflow: "hidden", display: "flex"}}>
-            <img alt={"Page1"} style={{width: "100%", alignSelf: "center"}} src={image} />
+            <img alt={name} style={{width: "100%", alignSelf: "center"}} src={image} />
         </div>
 
       <CardContent>
 
-        {icon === "Instagram" &&
         <Typography variant="subtitle2">
-          Jade Roper Tolbert
-          Motherhood | Creating my own path | Emmy & Brooks & Reed | 💍 @tanner.tolbert | 🎙 @mommiestellall | 📩 paul@cegtalent.com
+          {name}
         </Typography>
-        }
-        {icon !== "Instagram" &&
-        <Typography variant="subtitle2">
-          @jadeelizabethroper
-          Official FB page of Jade Elizabeth Roper
-        </Typography>
-        }
-
 
         <br />
 

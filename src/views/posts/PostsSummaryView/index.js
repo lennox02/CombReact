@@ -10,6 +10,7 @@ import Posts from './Posts';
 import Post from './Post';
 import Filters from './Filters';
 import Followers from './Followers';
+import PageCard from "../../pages/PagesSummaryView/Page";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +55,65 @@ const PostsSummary = () => {
     dateCalc(26)
   ];
 
+  const apiPosts = [];
+  const [apiPostsState, setApiPostsState] = useState(apiPosts);
+
+  const pgFetched = false;
+  const [pgFetchedState, setPgFetchedState] = useState(pgFetched);
+
+  console.log(pgFetchedState);
+
+  if(pgFetchedState === false) {
+    fetch(
+      'http://localhost/CombLaravel/public/facebookPosts',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"userId": localStorage.getItem('user_id')})
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        if (json) {
+          let items = [];
+          for (let i = 0; i < json.length; i++) {
+            let obj = json[i];
+            let words = [];
+            let word_count_json = JSON.parse(obj.word_count_json);
+
+            if(word_count_json !== null) {
+              for (let x in word_count_json) {
+                words.push({text: x, value: word_count_json[x]});
+              }
+            }
+            console.log(obj);
+
+            localStorage.setItem('post_cloud_' + obj.site_post_id, JSON.stringify(words));
+
+            items.push(<Post
+              key={i}
+              id={obj.site_post_id}
+              icon={obj.site}
+              image={obj.img_url}
+              date={obj.site_created_at}
+              message={obj.message}
+              words={words}
+              state={postState}
+            />);
+
+          }
+          setApiPostsState(items);
+        } else {
+          console.log("fail");
+        }
+        setPgFetchedState(true);
+      });
+  }
+
   return (
     <Page
       className={classes.root}
@@ -96,54 +156,7 @@ const PostsSummary = () => {
             >
               <Posts />
             </Grid>
-            <Post
-              icon={"Facebook"}
-              image={"/static/images/facebook/post/insta_post_1.jpg"}
-              date={dates[0]}
-              state={postState}
-            />
-            <Post
-              icon={"Instagram"}
-              image={"/static/images/facebook/post/insta_post_2.jpg"}
-              date={dates[1]}
-              state={postState}
-            />
-            <Post
-              icon={"Facebook"}
-              image={"/static/images/facebook/post/insta_post_3.jpg"}
-              date={dates[2]}
-              state={postState}
-            />
-            <Post
-              icon={"Instagram"}
-              image={"/static/images/facebook/post/insta_post_4.jpg"}
-              date={dates[3]}
-              state={postState}
-            />
-            <Post
-              icon={"Facebook"}
-              image={"/static/images/facebook/post/insta_post_5.jpg"}
-              date={dates[4]}
-              state={postState}
-            />
-            <Post
-              icon={"Instagram"}
-              image={"/static/images/facebook/post/insta_post_6.jpg"}
-              date={dates[5]}
-              state={postState}
-            />
-            <Post
-              icon={"Facebook"}
-              image={"/static/images/facebook/post/insta_post_7.jpg"}
-              date={dates[6]}
-              state={postState}
-            />
-            <Post
-              icon={"Instagram"}
-              image={"/static/images/facebook/post/insta_post_8.jpg"}
-              date={dates[7]}
-              state={postState}
-            />
+            {apiPostsState}
           </Grid>
           <Grid
             item
