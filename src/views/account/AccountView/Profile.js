@@ -43,7 +43,7 @@ const Profile = ({ className, ...rest }) => {
 
   const responseFacebook = (response) => {
     fetch(
-      'http://localhost/CombLaravel/public/facebook',
+      'https://api.combanalytics.com/public/facebook',
       {
         method: 'POST',
         headers: {

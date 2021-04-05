@@ -34,7 +34,7 @@ const Sales = ({ className, state, ...rest }) => {
 
   if(CommentsFetchedState === false) {
     fetch(
-      'http://localhost/CombLaravel/public/commentCounts',
+      'https://api.combanalytics.com/public/commentCounts',
       {
         method: 'POST',
         headers: {

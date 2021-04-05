@@ -47,7 +47,7 @@ const PagesSummary = () => {
 
   if(pgFetchedState === false) {
     fetch(
-      'http://localhost/CombLaravel/public/facebookPages',
+      'https://api.combanalytics.com/public/facebookPages',
       {
         method: 'POST',
         headers: {
@@ -55,7 +55,7 @@ const PagesSummary = () => {
           'Authorization': 'Bearer ' + localStorage.getItem('token'),
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"userId": 1})
+        body: JSON.stringify({"userId": localStorage.getItem('user_id')})
       }
     )
     .then(res => res.json())

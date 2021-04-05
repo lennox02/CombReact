@@ -65,7 +65,7 @@ const PostsSummary = () => {
 
   if(pgFetchedState === false) {
     fetch(
-      'http://localhost/CombLaravel/public/facebookPosts',
+      'https://api.combanalytics.com/public/facebookPosts',
       {
         method: 'POST',
         headers: {
