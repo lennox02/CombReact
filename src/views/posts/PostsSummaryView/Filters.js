@@ -145,7 +145,6 @@ const Filters = ({ className, stateFilter, ...rest }) => {
       ...values,
       [event.target.name]: event.target.value
     });
-    console.log(event.target.value);
     stateFilter(event.target.name, event.target.value);
   };
 

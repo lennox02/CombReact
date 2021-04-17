@@ -12,6 +12,7 @@ import {
   TextField,
   makeStyles
 } from '@material-ui/core';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const states = [
   {
@@ -35,19 +36,82 @@ const useStyles = makeStyles(() => ({
 const ProfileDetails = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
-    firstName: 'Jade',
-    lastName: 'Roper',
-    email: 'jaderoper@gmail.com',
-    phone: '',
-    state: 'california',
-    country: 'USA'
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: ''
   });
+
+  const profileFetched = false;
+  const [profileFetchedState, setProfileFetchedState] = useState(profileFetched);
+
+  if(profileFetchedState === false) {
+    fetch(
+      'http://localhost/CombLaravel/public/user',
+      {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        let names = json.name.split(" ");
+        let obj = {
+          firstName: names[0],
+          lastName: names[1],
+          email: json.email,
+          phone: json.phone
+        }
+        setValues(obj);
+        setProfileFetchedState(true);
+      });
+  }
 
   const handleChange = (event) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
+  };
+
+
+  const submitProfile = () => {
+    fetch(
+      'http://localhost/CombLaravel/public/user',
+      {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "name": values.firstName + " " + values.lastName,
+          "email": values.email,
+          "phone": values.phone
+        })
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        if(json) {
+          let names = json.name.split(" ");
+          let obj = {
+            firstName: names[0],
+            lastName: names[1],
+            email: json.email,
+            phone: json.phone
+          }
+          setValues(obj);
+          NotificationManager.success('', 'Updated!', 1000);
+        } else {
+          NotificationManager.error('', 'Error!');
+        }
+      });
   };
 
   return (
@@ -134,41 +198,12 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Country"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
-              />
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="Select State"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
             </Grid>
           </Grid>
         </CardContent>
@@ -181,11 +216,13 @@ const ProfileDetails = ({ className, ...rest }) => {
           <Button
             color="primary"
             variant="contained"
+            onClick={submitProfile}
           >
             Save details
           </Button>
         </Box>
       </Card>
+      <NotificationContainer/>
     </form>
   );
 };

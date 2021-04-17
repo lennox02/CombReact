@@ -54,7 +54,7 @@ const LoginView = () => {
             onSubmit={
               (values, {resetForm, setStatus}) => {
                 fetch(
-                  'https://api.combanalytics.com/public/login',
+                  'http://localhost/CombLaravel/public/login',
                   {
                     method: 'POST',
                     headers: {

@@ -32,9 +32,50 @@ const PagesSummary = () => {
     time: 'month'
   };
 
+  const followers = {};
+  const [followersState, setfollowersState] = useState(followers);
+
+  const getFollowers = (platform) => {
+    let tempfollowers = [];
+    let tempDates = [];
+    let min = 0;
+    fetch(
+      'http://localhost/CombLaravel/public/followerCounts',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "userId": localStorage.getItem('user_id'),
+          "site": platform
+        })
+      }
+    )
+      .then(res => res.json())
+      .then(json => {
+        if (json.data) {
+          console.log(json.data);
+          for(let i = 0; i < json.data.length; i++){
+            tempfollowers.push(parseInt(json.data[i].follower_count));
+            tempDates.push(json.data[i].date);
+          }
+          min = Math.min(...tempfollowers);
+        } else {
+          console.log("fail");
+        }
+        setfollowersState({'followers': tempfollowers, 'dates': tempDates, 'min': min});
+      });
+  }
+
   const [pageState, setPageState] = useState(pagesState);
   const pageCallbackFunction = (pageStateKey, pageStateVal) => {
     setPageState({...pageState, [pageStateKey]: pageStateVal})
+    if(pageStateKey === 'platform' && pageStateVal !== 'all'){
+      getFollowers(pageStateVal);
+    }
   };
 
   const apiPages = [];
@@ -47,7 +88,7 @@ const PagesSummary = () => {
 
   if(pgFetchedState === false) {
     fetch(
-      'https://api.combanalytics.com/public/facebookPages',
+      'http://localhost/CombLaravel/public/facebookPages',
       {
         method: 'POST',
         headers: {
@@ -102,10 +143,7 @@ const PagesSummary = () => {
           </Grid>
           <Grid
             container
-            lg={6}
-            md={12}
             xl={6}
-            xs={12}
             style={{padding: '12px'}}
             padding={12}
             spacing={3}
@@ -133,7 +171,7 @@ const PagesSummary = () => {
           >
             <Sales state={pageState} />
             <br />
-            <Followers state={pageState} />
+            <Followers state={pageState} followers={followersState} />
           </Grid>
         </Grid>
       </Container>

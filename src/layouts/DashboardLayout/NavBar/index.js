@@ -14,6 +14,7 @@ import {
 import {
   Trello as TrelloIcon,
   Layout as LayoutIcon,
+  User as UserIcon,
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -33,6 +34,11 @@ const items = [
     href: '/app/pages',
     icon: LayoutIcon,
     title: 'Accounts & Pages'
+  },
+  {
+    href: '/app/account',
+    icon: UserIcon,
+    title: 'My Profile'
   }
 ];
 

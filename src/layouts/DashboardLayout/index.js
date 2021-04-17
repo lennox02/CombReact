@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
+import {NotificationManager} from "react-notifications";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +37,13 @@ const useStyles = makeStyles((theme) => ({
 const DashboardLayout = () => {
   const classes = useStyles();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(localStorage.getItem('token') === null || localStorage.getItem('token') === '') {
+        navigate('/', { replace: true });
+    }
+  });
 
   return (
     <div className={classes.root}>

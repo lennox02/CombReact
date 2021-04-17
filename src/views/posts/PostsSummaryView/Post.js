@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import { Link } from 'react-router-dom';
 
 const options = {
   rotations: 0,
@@ -115,7 +116,7 @@ const Post = ({ className, id, icon, image, message, words, date, time, state, .
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <a href={url} style={{width: "100%", alignSelf: "center"}}>
+      <Link to={url} style={{width: "100%", alignSelf: "center"}}>
       <CardContent>
         <Grid container spacing={3} alignItems="center">
           <Grid item>{icon === "Instagram" && <InstagramIcon style={{color: "#e4405f"}} />}{icon !== "Instagram" && <FacebookIcon style={{color: "#3b5998"}} />}</Grid>
@@ -168,7 +169,7 @@ const Post = ({ className, id, icon, image, message, words, date, time, state, .
         }
 
       </CardContent>
-      </a>
+      </Link>
     </Card>
     </Grid>
   );

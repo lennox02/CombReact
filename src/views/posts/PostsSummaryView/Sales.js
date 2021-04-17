@@ -34,7 +34,7 @@ const Sales = ({ className, state, ...rest }) => {
 
   if(CommentsFetchedState === false) {
     fetch(
-      'https://api.combanalytics.com/public/commentCounts',
+      'http://localhost/CombLaravel/public/commentCounts',
       {
         method: 'POST',
         headers: {
@@ -45,25 +45,23 @@ const Sales = ({ className, state, ...rest }) => {
         body: JSON.stringify({"userId": localStorage.getItem('user_id')})
       }
     )
-      .then(res => res.json())
-      .then(json => {
-        if (json.data) {
-          console.log(json.data);
-          let tempComments = [];
-          let tempDates = [];
-          for(let i = 0; i < json.data.length; i++){
-            tempComments.push(json.data[i].comment_count);
-            tempDates.push(json.data[i].date);
-          }
-          console.log(tempComments);
-          console.log(tempDates);
-          setCommentsState(tempComments);
-          setDatesState(tempDates);
-        } else {
-          console.log("fail");
+    .then(res => res.json())
+    .then(json => {
+      if (json.data) {
+        console.log(json.data);
+        let tempComments = [];
+        let tempDates = [];
+        for(let i = 0; i < json.data.length; i++){
+          tempComments.push(json.data[i].comment_count);
+          tempDates.push(json.data[i].date);
         }
-        setCommentsFetchedState(true);
-      });
+        setCommentsState(tempComments);
+        setDatesState(tempDates);
+      } else {
+        console.log("fail");
+      }
+    });
+    setCommentsFetchedState(true);
   }
 
 

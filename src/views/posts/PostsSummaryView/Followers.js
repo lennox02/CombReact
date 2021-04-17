@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
@@ -17,111 +17,15 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Followers = ({ className, state, ...rest }) => {
+const Followers = ({ className, state, followers, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  const getCalcDate = (days) => {
-    let d = new Date();
-
-    d.setDate(d.getDate() - days)
-
-    return d.getDate() + " " + monthNames[d.getMonth()];
-  }
-
-  let fbFollowers = [];
-  let igFollowers = [];
-  let dates = [];
-
-  fbFollowers = [
-    200230,
-    202250,
-    202480,
-    202700,
-    203000,
-    203110,
-    203240,
-    203200,
-    206010,
-    206800,
-    207200,
-    207520,
-    207680,
-    207750,
-    207760,
-    210210,
-    211500,
-    212480,
-    212990,
-    213230,
-    213280,
-    213200,
-    217180,
-    218380,
-    219120,
-    219450,
-    219560,
-    219310,
-    219430,
-    244109
-  ];
-  igFollowers = [
-    1204800,
-    1208000,
-    1211500,
-    1213700,
-    1250300,
-    1258400,
-    1263200,
-    1266100,
-    1268200,
-    1269900,
-    1271200,
-    1305500,
-    1320900,
-    1327300,
-    1331200,
-    1345000,
-    1352000,
-    1356100,
-    1409200,
-    1424700,
-    1432100,
-    1435500,
-    1438800,
-    1439500,
-    1440100,
-    1472100,
-    1480300,
-    1490900,
-    1496800,
-    1507000
-  ];
-
-  for (let i = 30; i >= 1; i--) {
-    dates.push(getCalcDate(i))
-  }
-
-  if(state.time === "week"){
-    fbFollowers.splice(0, 23);
-    igFollowers.splice(0, 23);
-    dates.splice(0, 23);
-  }
-
-  let followers = fbFollowers;
-
-  if(state.platform === "instagram"){
-    followers = igFollowers;
-  }
-
 
   const data = {
     datasets: [
       {
         backgroundColor: colors.blue[500],
-        data: followers,
+        data: followers.followers,
         label: 'Followers'
       }
     ],
@@ -134,7 +38,7 @@ const Followers = ({ className, state, ...rest }) => {
         }]
       }
     },
-    labels: dates
+    labels: followers.dates
   };
 
   const options = {
@@ -165,7 +69,7 @@ const Followers = ({ className, state, ...rest }) => {
           ticks: {
             fontColor: theme.palette.text.secondary,
             beginAtZero: true,
-            min: 20000
+            min: followers.min
           },
           gridLines: {
             borderDash: [2],

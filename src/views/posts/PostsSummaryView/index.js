@@ -38,10 +38,51 @@ const PostsSummary = () => {
     time: 'month'
   };
 
+  const followers = {};
+
   const [postState, setPostState] = useState(postPageState);
+  const [followersState, setfollowersState] = useState(followers);
+
+  const getFollowers = (platform) => {
+    let tempfollowers = [];
+    let tempDates = [];
+    let min = 0;
+      fetch(
+      'http://localhost/CombLaravel/public/followerCounts',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "userId": localStorage.getItem('user_id'),
+          "site": platform
+        })
+      }
+    )
+    .then(res => res.json())
+    .then(json => {
+      if (json.data) {
+        console.log(json.data);
+        for(let i = 0; i < json.data.length; i++){
+          tempfollowers.push(parseInt(json.data[i].follower_count));
+          tempDates.push(json.data[i].date);
+        }
+        min = Math.min(...tempfollowers);
+      } else {
+        console.log("fail");
+      }
+      setfollowersState({'followers': tempfollowers, 'dates': tempDates, 'min': min});
+    });
+  }
 
   const callbackFunction = (stateKey, stateVal) => {
-    setPostState({...postState, [stateKey]: stateVal})
+    setPostState({...postState, [stateKey]: stateVal});
+    if(stateKey === 'platform' && stateVal !== 'all'){
+      getFollowers(stateVal);
+    }
   };
 
   const dates = [
@@ -61,11 +102,9 @@ const PostsSummary = () => {
   const pgFetched = false;
   const [pgFetchedState, setPgFetchedState] = useState(pgFetched);
 
-  console.log(pgFetchedState);
-
   if(pgFetchedState === false) {
     fetch(
-      'https://api.combanalytics.com/public/facebookPosts',
+      'http://localhost/CombLaravel/public/facebookPosts',
       {
         method: 'POST',
         headers: {
@@ -76,42 +115,41 @@ const PostsSummary = () => {
         body: JSON.stringify({"userId": localStorage.getItem('user_id')})
       }
     )
-      .then(res => res.json())
-      .then(json => {
-        if (json) {
-          let items = [];
-          for (let i = 0; i < json.length; i++) {
-            let obj = json[i];
-            let words = [];
-            let word_count_json = JSON.parse(obj.word_count_json);
+    .then(res => res.json())
+    .then(json => {
+      if (json) {
+        let items = [];
+        for (let i = 0; i < json.length; i++) {
+          let obj = json[i];
+          let words = [];
+          let word_count_json = JSON.parse(obj.word_count_json);
 
-            if(word_count_json !== null) {
-              for (let x in word_count_json) {
-                words.push({text: x, value: word_count_json[x]});
-              }
+          if(word_count_json !== null) {
+            for (let x in word_count_json) {
+              words.push({text: x, value: word_count_json[x]});
             }
-            console.log(obj);
-
-            localStorage.setItem('post_cloud_' + obj.site_post_id, JSON.stringify(words));
-
-            items.push(<Post
-              key={i}
-              id={obj.site_post_id}
-              icon={obj.site}
-              image={obj.img_url}
-              date={obj.site_created_at}
-              message={obj.message}
-              words={words}
-              state={postState}
-            />);
-
           }
-          setApiPostsState(items);
-        } else {
-          console.log("fail");
+
+          localStorage.setItem('post_cloud_' + obj.site_post_id, JSON.stringify(words));
+
+          items.push(<Post
+            key={i}
+            id={obj.site_post_id}
+            icon={obj.site}
+            image={obj.img_url}
+            date={obj.site_created_at}
+            message={obj.message}
+            words={words}
+            state={postState}
+          />);
+
         }
-        setPgFetchedState(true);
-      });
+        setApiPostsState(items);
+      } else {
+        console.log("fail");
+      }
+    });
+    setPgFetchedState(true);
   }
 
   return (
@@ -136,10 +174,7 @@ const PostsSummary = () => {
           </Grid>
           <Grid
             container
-            lg={6}
-            md={12}
             xl={6}
-            xs={12}
             style={{padding: '12px'}}
             padding={12}
             spacing={3}
@@ -167,7 +202,7 @@ const PostsSummary = () => {
           >
             <Sales state={postState} />
             <br />
-            <Followers state={postState} />
+            <Followers state={postState} followers={followersState} />
           </Grid>
         </Grid>
       </Container>

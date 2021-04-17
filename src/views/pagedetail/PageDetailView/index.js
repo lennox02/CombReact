@@ -53,7 +53,7 @@ const CustomerListView = () => {
 
   if(fetched === false) {
     fetch(
-      'https://api.combanalytics.com/public/facebookPostComments',
+      'http://localhost/CombLaravel/public/facebookPostComments',
       {
         method: 'POST',
         headers: {
@@ -79,7 +79,7 @@ const CustomerListView = () => {
 
   const search = (word) => {
     fetch(
-      'https://api.combanalytics.com/public/facebookPostComments',
+      'http://localhost/CombLaravel/public/facebookPostComments',
       {
         method: 'POST',
         headers: {
