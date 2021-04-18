@@ -52,8 +52,12 @@ const CustomerListView = () => {
   }
 
   if(fetched === false) {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/facebookPostComments',
+      baseUrl + '/public/facebookPostComments',
       {
         method: 'POST',
         headers: {
@@ -78,8 +82,12 @@ const CustomerListView = () => {
   }
 
   const search = (word) => {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/facebookPostComments',
+      baseUrl + '/public/facebookPostComments',
       {
         method: 'POST',
         headers: {

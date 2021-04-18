@@ -42,8 +42,12 @@ const Profile = ({ className, ...rest }) => {
 
 
   const responseFacebook = (response) => {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/facebook',
+      baseUrl + '/public/facebook',
       {
         method: 'POST',
         headers: {

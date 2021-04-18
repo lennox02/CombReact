@@ -53,8 +53,12 @@ const LoginView = () => {
             })}
             onSubmit={
               (values, {resetForm, setStatus}) => {
+                let baseUrl = 'http://localhost/CombLaravel';
+                if(process.env.NODE_ENV === 'production'){
+                  baseUrl = 'https://api.combanalytics.com';
+                }
                 fetch(
-                  'http://localhost/CombLaravel/public/login',
+                  baseUrl + '/public/login',
                   {
                     method: 'POST',
                     headers: {

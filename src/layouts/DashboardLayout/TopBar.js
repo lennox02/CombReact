@@ -36,8 +36,12 @@ const TopBar = ({
   const navigate = useNavigate();
 
   const logout = () => {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/logout',
+      baseUrl + '/public/logout',
       {
         method: 'PUT',
         headers: {

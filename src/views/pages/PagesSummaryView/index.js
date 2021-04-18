@@ -39,8 +39,12 @@ const PagesSummary = () => {
     let tempfollowers = [];
     let tempDates = [];
     let min = 0;
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/followerCounts',
+      baseUrl + '/public/followerCounts',
       {
         method: 'POST',
         headers: {
@@ -87,8 +91,12 @@ const PagesSummary = () => {
   console.log(pgFetchedState);
 
   if(pgFetchedState === false) {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/facebookPages',
+      baseUrl + '/public/facebookPages',
       {
         method: 'POST',
         headers: {

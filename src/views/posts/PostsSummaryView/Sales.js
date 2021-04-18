@@ -33,8 +33,12 @@ const Sales = ({ className, state, ...rest }) => {
   const [datesState, setDatesState] = useState(dates);
 
   if(CommentsFetchedState === false) {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/commentCounts',
+      baseUrl + '/public/commentCounts',
       {
         method: 'POST',
         headers: {

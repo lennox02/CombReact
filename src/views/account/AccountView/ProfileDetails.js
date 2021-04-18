@@ -46,8 +46,12 @@ const ProfileDetails = ({ className, ...rest }) => {
   const [profileFetchedState, setProfileFetchedState] = useState(profileFetched);
 
   if(profileFetchedState === false) {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/user',
+      baseUrl + '/public/user',
       {
         method: 'GET',
         headers: {
@@ -80,8 +84,12 @@ const ProfileDetails = ({ className, ...rest }) => {
 
 
   const submitProfile = () => {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/user',
+      baseUrl + '/public/user',
       {
         method: 'PUT',
         headers: {

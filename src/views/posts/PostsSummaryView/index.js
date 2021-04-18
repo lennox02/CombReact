@@ -47,20 +47,24 @@ const PostsSummary = () => {
     let tempfollowers = [];
     let tempDates = [];
     let min = 0;
-      fetch(
-      'http://localhost/CombLaravel/public/followerCounts',
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "userId": localStorage.getItem('user_id'),
-          "site": platform
-        })
-      }
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
+    fetch(
+      baseUrl + '/public/followerCounts',
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "userId": localStorage.getItem('user_id'),
+        "site": platform
+      })
+    }
     )
     .then(res => res.json())
     .then(json => {
@@ -103,8 +107,12 @@ const PostsSummary = () => {
   const [pgFetchedState, setPgFetchedState] = useState(pgFetched);
 
   if(pgFetchedState === false) {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
     fetch(
-      'http://localhost/CombLaravel/public/facebookPosts',
+      baseUrl + '/public/facebookPosts',
       {
         method: 'POST',
         headers: {
