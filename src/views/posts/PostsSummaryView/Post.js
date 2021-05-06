@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Post = ({ className, id, icon, image, message, words, date, time, state, ...rest }) => {
+const Post = ({ className, id, icon, image, likes, reactions, message, words, date, time, state, ...rest }) => {
 
   const classes = useStyles();
 
@@ -140,22 +140,17 @@ const Post = ({ className, id, icon, image, message, words, date, time, state, .
         <br />
 
         {icon === "Instagram" &&
-        <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
+        <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px", textAlign:"center"}}>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>{Math.round(540.2 * modNum() * 10) / 10}k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
+          <Grid item lg={2} sm={2} xl={2} xs={2} ><div style={{fontSize:"20px", paddingBottom: "2px"}}>{likes}</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
         </Grid>
         }
         {icon !== "Instagram" &&
-          <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('like') && <div><div>{Math.round(41.4 * modNum() * 10) / 10}k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('love') && <div><div>{Math.round(11.3 * modNum() * 10) / 10}k</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('care') && <div><div>{Math.round(2.1 * modNum() * 10) / 10}k</div><img alt={"care"} src={'/static/images/facebook/icons/care.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('laugh') && <div><div>{Math.round(4.5 * modNum() * 10) / 10}k</div><img alt={"haha"} src={'/static/images/facebook/icons/happy.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('wow') && <div><div>{Math.round(904 * modNum())}</div><img alt={"wow"} src={'/static/images/facebook/icons/wow.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('sad') && <div><div>{Math.round(7.2 * modNum() * 10) / 10}k</div><img alt={"sad"} src={'/static/images/facebook/icons/sad.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1} style={{paddingLeft: "22px", paddingRight: "22px"}}>{showEmote('angry') && <div><div>{Math.round(33.5 * modNum() * 10) / 10}k</div><img alt={"mad"} src={'/static/images/facebook/icons/anger.png'} /></div>}</Grid>
-            <Grid item lg={1} sm={1} xl={1} xs={1}></Grid>
+          <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px", textAlign:"center"}}>
+            <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
+            <Grid item lg={2} sm={2} xl={2} xs={2} ><div style={{fontSize:"20px", paddingBottom: "2px"}}>{likes}({reactions})</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></Grid>
+            <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
           </Grid>
         }
 

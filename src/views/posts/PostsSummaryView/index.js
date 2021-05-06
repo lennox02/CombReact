@@ -148,6 +148,8 @@ const PostsSummary = () => {
             date={obj.site_created_at}
             message={obj.message}
             words={words}
+            likes={obj.like_count}
+            reactions={obj.reaction_count}
             state={postState}
           />);
 

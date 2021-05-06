@@ -113,11 +113,22 @@ const PagesSummary = () => {
         let items = [];
         for (let i = 0; i < json.length; i++) {
           let obj = json[i];
+          let words = [];
+          let word_count_json = JSON.parse(obj.word_count_json);
+
+          if(word_count_json !== null) {
+            for (let x in word_count_json) {
+              words.push({text: x, value: word_count_json[x]});
+            }
+          }
+
+          localStorage.setItem('page_cloud_' + obj.site_post_id, JSON.stringify(words));
 
           items.push(<PageCard
             name={obj.name}
             icon={obj.site}
             image={obj.img_url}
+            words={words}
             state={pageState}
           />);
         }

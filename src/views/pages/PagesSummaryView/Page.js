@@ -18,219 +18,219 @@ const options = {
   fontSizes: [14, 48]
 };
 
-const words = [
-  {
-    text: 'day',
-    value: 16,
-  },
-  {
-    text: 'first',
-    value: 9,
-  },
-  {
-    text: 'emmy',
-    value: 9,
-  },
-  {
-    text: 'preschool',
-    value: 7,
-  },
-  {
-    text: 'great',
-    value: 7,
-  },
-  {
-    text: 'school',
-    value: 6,
-  },
-  {
-    text: 'adorable',
-    value: 6,
-  },
-  {
-    text: 'hope',
-    value: 5,
-  },
-  {
-    text: 'good',
-    value: 5,
-  },
-  {
-    text: 'fun',
-    value: 5,
-  },
-  {
-    text: 'cute',
-    value: 5,
-  },
-  {
-    text: 'sweet',
-    value: 4,
-  },
-  {
-    text: 'luck',
-    value: 4,
-  },
-  {
-    text: 'precious',
-    value: 4,
-  },
-  {
-    text: 'exciting',
-    value: 3,
-  },
-  {
-    text: 'bless',
-    value: 3,
-  },
-  {
-    text: 'best',
-    value: 3,
-  },
-  {
-    text: 'all',
-    value: 3,
-  },
-  {
-    text: 'absolutely',
-    value: 3,
-  },
-  {
-    text: 'wonderful',
-    value: 2,
-  },
-  {
-    text: 'teacher',
-    value: 2,
-  },
-  {
-    text: 'old',
-    value: 2,
-  },
-  {
-    text: 'heart',
-    value: 2,
-  },
-  {
-    text: 'happy',
-    value: 2,
-  },
-  {
-    text: 'growing',
-    value: 2,
-  },
-  {
-    text: 'fast',
-    value: 2,
-  },
-];
-
-const words2 = [
-  {
-    text: 'beautiful',
-    value: 7,
-  },
-  {
-    text: 'hair',
-    value: 6,
-  },
-  {
-    text: 'emmy',
-    value: 6,
-  },
-  {
-    text: 'cute',
-    value: 5,
-  },
-  {
-    text: 'love',
-    value: 5,
-  },
-  {
-    text: 'precious',
-    value: 4,
-  },
-  {
-    text: 'mullet',
-    value: 3,
-  },
-  {
-    text: 'reed',
-    value: 3,
-  },
-  {
-    text: 'think',
-    value: 3,
-  },
-  {
-    text: 'thing',
-    value: 3,
-  },
-  {
-    text: 'omg',
-    value: 3,
-  },
-  {
-    text: 'kiddos',
-    value: 3,
-  },
-  {
-    text: 'lucky',
-    value: 2,
-  },
-  {
-    text: 'week',
-    value: 2,
-  },
-  {
-    text: 'exciting',
-    value: 2,
-  },
-  {
-    text: 'most',
-    value: 2,
-  },
-  {
-    text: 'more',
-    value: 2,
-  },
-  {
-    text: 'cutest',
-    value: 2,
-  },
-  {
-    text: 'seen',
-    value: 2,
-  },
-  {
-    text: 'young',
-    value: 2,
-  },
-  {
-    text: 'sweethearts',
-    value: 2,
-  },
-  {
-    text: 'unique',
-    value: 2,
-  },
-  {
-    text: 'thank',
-    value: 2,
-  },
-  {
-    text: 'happy',
-    value: 2,
-  },
-  {
-    text: 'strong',
-    value: 2,
-  },
-  {
-    text: 'growing',
-    value: 2,
-  },
-];
+// const words = [
+//   {
+//     text: 'day',
+//     value: 16,
+//   },
+//   {
+//     text: 'first',
+//     value: 9,
+//   },
+//   {
+//     text: 'emmy',
+//     value: 9,
+//   },
+//   {
+//     text: 'preschool',
+//     value: 7,
+//   },
+//   {
+//     text: 'great',
+//     value: 7,
+//   },
+//   {
+//     text: 'school',
+//     value: 6,
+//   },
+//   {
+//     text: 'adorable',
+//     value: 6,
+//   },
+//   {
+//     text: 'hope',
+//     value: 5,
+//   },
+//   {
+//     text: 'good',
+//     value: 5,
+//   },
+//   {
+//     text: 'fun',
+//     value: 5,
+//   },
+//   {
+//     text: 'cute',
+//     value: 5,
+//   },
+//   {
+//     text: 'sweet',
+//     value: 4,
+//   },
+//   {
+//     text: 'luck',
+//     value: 4,
+//   },
+//   {
+//     text: 'precious',
+//     value: 4,
+//   },
+//   {
+//     text: 'exciting',
+//     value: 3,
+//   },
+//   {
+//     text: 'bless',
+//     value: 3,
+//   },
+//   {
+//     text: 'best',
+//     value: 3,
+//   },
+//   {
+//     text: 'all',
+//     value: 3,
+//   },
+//   {
+//     text: 'absolutely',
+//     value: 3,
+//   },
+//   {
+//     text: 'wonderful',
+//     value: 2,
+//   },
+//   {
+//     text: 'teacher',
+//     value: 2,
+//   },
+//   {
+//     text: 'old',
+//     value: 2,
+//   },
+//   {
+//     text: 'heart',
+//     value: 2,
+//   },
+//   {
+//     text: 'happy',
+//     value: 2,
+//   },
+//   {
+//     text: 'growing',
+//     value: 2,
+//   },
+//   {
+//     text: 'fast',
+//     value: 2,
+//   },
+// ];
+//
+// const words2 = [
+//   {
+//     text: 'beautiful',
+//     value: 7,
+//   },
+//   {
+//     text: 'hair',
+//     value: 6,
+//   },
+//   {
+//     text: 'emmy',
+//     value: 6,
+//   },
+//   {
+//     text: 'cute',
+//     value: 5,
+//   },
+//   {
+//     text: 'love',
+//     value: 5,
+//   },
+//   {
+//     text: 'precious',
+//     value: 4,
+//   },
+//   {
+//     text: 'mullet',
+//     value: 3,
+//   },
+//   {
+//     text: 'reed',
+//     value: 3,
+//   },
+//   {
+//     text: 'think',
+//     value: 3,
+//   },
+//   {
+//     text: 'thing',
+//     value: 3,
+//   },
+//   {
+//     text: 'omg',
+//     value: 3,
+//   },
+//   {
+//     text: 'kiddos',
+//     value: 3,
+//   },
+//   {
+//     text: 'lucky',
+//     value: 2,
+//   },
+//   {
+//     text: 'week',
+//     value: 2,
+//   },
+//   {
+//     text: 'exciting',
+//     value: 2,
+//   },
+//   {
+//     text: 'most',
+//     value: 2,
+//   },
+//   {
+//     text: 'more',
+//     value: 2,
+//   },
+//   {
+//     text: 'cutest',
+//     value: 2,
+//   },
+//   {
+//     text: 'seen',
+//     value: 2,
+//   },
+//   {
+//     text: 'young',
+//     value: 2,
+//   },
+//   {
+//     text: 'sweethearts',
+//     value: 2,
+//   },
+//   {
+//     text: 'unique',
+//     value: 2,
+//   },
+//   {
+//     text: 'thank',
+//     value: 2,
+//   },
+//   {
+//     text: 'happy',
+//     value: 2,
+//   },
+//   {
+//     text: 'strong',
+//     value: 2,
+//   },
+//   {
+//     text: 'growing',
+//     value: 2,
+//   },
+// ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -250,7 +250,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Page = ({ className, name, icon, image, state, ...rest }) => {
+const Page = ({ className, name, icon, image, words, state, ...rest }) => {
   const classes = useStyles();
 
   const pageCard = (
@@ -287,14 +287,14 @@ const Page = ({ className, name, icon, image, state, ...rest }) => {
         {icon === "Instagram" &&
         <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>1.5m</div><img alt={"love"} src={'/static/images/facebook/icons/love.png'} /></Grid>
+          <Grid item lg={2} sm={2} xl={2} xs={2} ><div>{}</div></Grid>
           <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
         </Grid>
         }
         {icon !== "Instagram" &&
           <Grid container direction="row" justify="center" spacing={3} style={{paddingBottom: "12px"}}>
             <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
-            <Grid item lg={2} sm={2} xl={2} xs={2} ><div>244.1k</div><img alt={"like"} src={'/static/images/facebook/icons/like.png'} /></Grid>
+            <Grid item lg={2} sm={2} xl={2} xs={2} ><div>{}</div></Grid>
             <Grid item lg={5} sm={5} xl={5} xs={5} ></Grid>
           </Grid>
         }
@@ -302,7 +302,7 @@ const Page = ({ className, name, icon, image, state, ...rest }) => {
         <hr style={{color: "grey", backgroundColor: "grey"}} />
 
         {icon === "Instagram" &&
-        <ReactWordcloud words={words2} options={options} style={{height: "150px"}}/>
+        <ReactWordcloud words={words} options={options} style={{height: "150px"}}/>
         }
         {icon !== "Instagram" &&
         <ReactWordcloud words={words} options={options} style={{height: "150px"}}/>

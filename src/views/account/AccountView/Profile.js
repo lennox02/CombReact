@@ -115,7 +115,7 @@ const Profile = ({ className, ...rest }) => {
         autoLoad={false}
         fields="name,email,picture"
         textButton="Connect Facebook & Instagram"
-        scope="public_profile,email,pages_read_user_content,pages_show_list,pages_read_engagement,instagram_basic"
+        scope="user_likes,public_profile,email,pages_read_user_content,pages_show_list,pages_read_engagement,instagram_basic"
         callback={responseFacebook}
       />
     </Card>
