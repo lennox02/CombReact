@@ -5,7 +5,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Sales from 'src/views/posts/PostsSummaryView/Sales';
+import Engagement from 'src/views/posts/PostsSummaryView/Engagement';
 import Pages from './Pages';
 import PageCard from './Page';
 import PageFilters from 'src/views/posts/PostsSummaryView/Filters';
@@ -188,7 +188,7 @@ const PagesSummary = () => {
             xl={6}
             xs={12}
           >
-            <Sales state={pageState} />
+            <Engagement state={pageState} />
             <br />
             <Followers state={pageState} followers={followersState} />
           </Grid>

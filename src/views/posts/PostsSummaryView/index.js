@@ -5,12 +5,11 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Sales from './Sales';
+import Engagement from './Engagement';
 import Posts from './Posts';
 import Post from './Post';
 import Filters from './Filters';
 import Followers from './Followers';
-import PageCard from "../../pages/PagesSummaryView/Page";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,17 +87,6 @@ const PostsSummary = () => {
       getFollowers(stateVal);
     }
   };
-
-  const dates = [
-    dateCalc(1),
-    dateCalc(5),
-    dateCalc(8),
-    dateCalc(12),
-    dateCalc(15),
-    dateCalc(19),
-    dateCalc(22),
-    dateCalc(26)
-  ];
 
   const apiPosts = [];
   const [apiPostsState, setApiPostsState] = useState(apiPosts);
@@ -210,7 +198,7 @@ const PostsSummary = () => {
             xl={6}
             xs={12}
           >
-            <Sales state={postState} />
+            <Engagement state={postState} />
             <br />
             <Followers state={postState} followers={followersState} />
           </Grid>

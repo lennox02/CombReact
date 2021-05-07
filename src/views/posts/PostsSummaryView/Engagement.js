@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -13,31 +12,81 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import Post from "./Post";
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Sales = ({ className, ...rest }) => {
+const Engagement = ({ className, state, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
+
+
+  const commentsFetched = false;
+  const [CommentsFetchedState, setCommentsFetchedState] = useState(commentsFetched);
+
+  const comments = [];
+  const [commentsState, setCommentsState] = useState(comments);
+
+  const dates = [];
+  const [datesState, setDatesState] = useState(dates);
+
+  if(CommentsFetchedState === false) {
+    let baseUrl = 'http://localhost/CombLaravel';
+    if(process.env.NODE_ENV === 'production'){
+      baseUrl = 'https://api.combanalytics.com';
+    }
+    fetch(
+      baseUrl + '/public/commentCounts',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"userId": localStorage.getItem('user_id')})
+      }
+    )
+    .then(res => res.json())
+    .then(json => {
+      if (json.data) {
+        console.log(json.data);
+        let tempComments = [];
+        let tempDates = [];
+        for(let i = 0; i < json.data.length; i++){
+          tempComments.push(json.data[i].comment_count);
+          tempDates.push(json.data[i].date);
+        }
+        setCommentsState(tempComments);
+        setDatesState(tempDates);
+      } else {
+        console.log("fail");
+      }
+    });
+    setCommentsFetchedState(true);
+  }
+
 
   const data = {
     datasets: [
       {
-        backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20],
-        label: 'This year'
-      },
-      {
-        backgroundColor: colors.grey[200],
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year'
+        backgroundColor: colors.blue[500],
+        data: commentsState,
+        label: 'Comments'
       }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug']
+    options: {
+      scales: {
+        yAxes: [{
+          id: 'A',
+          type: 'linear',
+          position: 'left',
+        }]
+      }
+    },
+    labels: datesState
   };
 
   const options = {
@@ -101,16 +150,7 @@ const Sales = ({ className, ...rest }) => {
       {...rest}
     >
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
-            Last 7 days
-          </Button>
-        )}
-        title="Latest Sales"
+        title="ENGAGEMENT TRENDS"
       />
       <Divider />
       <CardContent>
@@ -130,21 +170,13 @@ const Sales = ({ className, ...rest }) => {
         justifyContent="flex-end"
         p={2}
       >
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-        >
-          Overview
-        </Button>
       </Box>
     </Card>
   );
 };
 
-Sales.propTypes = {
+Engagement.propTypes = {
   className: PropTypes.string
 };
 
-export default Sales;
+export default Engagement;
